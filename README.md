@@ -1,48 +1,73 @@
+# Deploy a application to Kubernetes through ArgoCD and GitOps
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/SuperAayush/Zomato-Clone)
+Prerequisites
+- Make sure you have a cluster ready on your terminal
+- ArgoCD is installed on the cluster
 
-Gitpod can provide a simple way to clone a repository on the browser itself without fork. You can configufre the repository on the browser version of VS Code without worrying about the dependencies to install.
+You can install ArgoCD with the following commands
 
-<h1 align="center">Zomato-Clone</h1>
+- This is optional, you can create a namespace "argocd" or go ahead with the "defautl" namespace<br>
+`kubectl create namespace argocd`
 
-<p aign="center">
-  <p align="center">A clone app of Zomato to practice HTML5 & CSS3.
-    </p>
-  <p align="center">Website: <a href="https://superaayush.github.io/Zomato-Clone/">Zomato-Clone</a></p>
-</p>
+- Run the install ArgoCD script <br>
+`kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`
 
-It is a beginner friendly project to start work upon, where you can learn:
-- How to raise an issue?
-- How to fork and work upon a repository?
-- How to make a PR?
+- Install the CLI with brew, for using the argocd commands <br>
+`brew install argocd`
 
-<br>
+- Enter the following command for getting the password <br>
+`kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo`
 
-![Screenshot](/Images/ss1.png)
+- Forward the port to 8080, for accessing it on browser <br>
+`kubectl port-forward svc/argocd-server -n argocd 8080:443`
 
-<br>
+- Now switch to another terminal, and make sure it keeps on running the forward command in the previous one
 
-![Screenshot](/Images/ss4.png)
+# Deployment
 
-<br>
+- Use the create command for creating the deployment <br>
+`argocd app create zomato-clone --repo https://github.com/argoproj/argocd-example-apps.git --path dev --dest-server https://kubernetes.default.svc --dest-namespace default` 
 
-## Technical Details
-**Languages:**
-```HTML5, CSS3, JavaScript```
+zomato-clone-> Name of your application
+--repo-> Repository URL of the application
+--path-> The path where all the YAML files are located in the repository
+--dest-server-> Destination cluster URL
+--dest-namespace-> The namespace 
 
-**Platforms:** 
-```GitHub Pages```
+![image](https://user-images.githubusercontent.com/84350895/218014312-01eebe34-86d7-42fc-b671-a778af6080a7.png)
 
-<hr>
 
-## Contributing
+- Now use the sync command for deploying <br>
+`argocd app sync zomato-clone`
 
-Contributions are always welcome!
+![image](https://user-images.githubusercontent.com/84350895/218012484-a9d5db47-948f-410d-9dae-e85c5366cbc6.png)
 
-See [CONTRIBUTIONS.md](https://github.com/SuperAayush/Zomato-Clone/blob/main/CONTRIBUTING.md) for ways to get started.
 
-Please adhere to this project's [code of conduct](https://github.com/SuperAayush/Zomato-Clone/blob/main/CODE_OF_CONDUCT.md).
+- You can check the status by <br>
+`argocd app get zomato-clone` 
 
-<hr>
+![image](https://user-images.githubusercontent.com/84350895/218013110-83400e16-daa0-4516-90d6-d88b3906a070.png) <br>
 
-Don't forget to leave a 🌟.
+![image](https://user-images.githubusercontent.com/84350895/218012814-b7d30a12-f7a1-4352-aec4-4e13e6d062ba.png)
+
+
+- Let's check the services <br>
+`kubectl get svc` 
+
+![image](https://user-images.githubusercontent.com/84350895/218014513-74a7d6e9-aadc-4d24-bd2e-539874ad52cf.png)
+
+
+- Port forwarding for accessing the application on port 9090 <br>
+`kubectl port-forward svc/zomato-clone 9090:80` 
+
+![image](https://user-images.githubusercontent.com/84350895/218014621-64fd82ef-da9a-437b-91d5-888eb9847502.png) <br>
+
+Application Deployed through CLI 🎉, you can also do this through the UI 🚀
+
+
+
+
+
+
+
+
