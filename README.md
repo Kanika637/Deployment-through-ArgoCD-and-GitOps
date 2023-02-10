@@ -26,13 +26,13 @@ You can install ArgoCD with the following commands
 # Deployment
 
 - Use the create command for creating the deployment <br>
-`argocd app create zomato-clone --repo https://github.com/argoproj/argocd-example-apps.git --path dev --dest-server https://kubernetes.default.svc --dest-namespace default` 
+`argocd app create zomato-clone --repo https://github.com/Kanika637/Deployment-through-ArgoCD-and-GitOps.git --path dev --dest-server https://kubernetes.default.svc --dest-namespace default` 
 
-zomato-clone-> Name of your application
---repo-> Repository URL of the application
---path-> The path where all the YAML files are located in the repository
---dest-server-> Destination cluster URL
---dest-namespace-> The namespace 
+- zomato-clone-> Name of your application <br>
+- --repo-> Repository URL of the application <br>
+- --path-> The path where all the YAML files are located in the repository <br>
+- --dest-server-> Destination cluster URL <br>
+- --dest-namespace-> The namespace <br>
 
 ![image](https://user-images.githubusercontent.com/84350895/218014312-01eebe34-86d7-42fc-b671-a778af6080a7.png)
 
