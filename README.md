@@ -40,7 +40,7 @@ You can install ArgoCD with the following commands
 - Now use the sync command for deploying <br>
 `argocd app sync zomato-clone`
 
-![image](https://user-images.githubusercontent.com/84350895/218012484-a9d5db47-948f-410d-9dae-e85c5366cbc6.png)
+![6](https://user-images.githubusercontent.com/84350895/218020315-f4c9c2c9-7b99-4aed-aa58-c9c966febe92.png)
 
 
 - You can check the status by <br>
@@ -48,7 +48,7 @@ You can install ArgoCD with the following commands
 
 ![image](https://user-images.githubusercontent.com/84350895/218013110-83400e16-daa0-4516-90d6-d88b3906a070.png) <br>
 
-![image](https://user-images.githubusercontent.com/84350895/218012814-b7d30a12-f7a1-4352-aec4-4e13e6d062ba.png)
+![8](https://user-images.githubusercontent.com/84350895/218019906-4cfaec28-59c7-457a-aeec-11b5efb9679b.png)
 
 
 - Let's check the services <br>
@@ -60,7 +60,8 @@ You can install ArgoCD with the following commands
 - Port forwarding for accessing the application on port 9090 <br>
 `kubectl port-forward svc/zomato-clone 9090:80` 
 
-![image](https://user-images.githubusercontent.com/84350895/218014621-64fd82ef-da9a-437b-91d5-888eb9847502.png) <br>
+![1](https://user-images.githubusercontent.com/84350895/218020127-d78dff37-b3f2-4648-b4f7-7d6f13b6e43d.png)
+ <br>
 
 Application Deployed through CLI 🎉, you can also do this through the UI 🚀
 
